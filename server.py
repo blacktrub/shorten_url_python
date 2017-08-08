@@ -11,6 +11,7 @@ async def init(loop, address, port):
     server = await loop.create_server(handler, address, port)
     return server.sockets[0].getsockname()
 
+
 def main(address='127.0.0.1', port='8888'):
     port = int(port)
     loop = asyncio.get_event_loop()
