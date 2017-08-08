@@ -1,2 +1,4 @@
 aiohttp==2.2.5
 aiohttp-jinja2==0.13.0
+aiopg==0.13.0
+SQLAlchemy==1.1.13
