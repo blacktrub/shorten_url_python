@@ -2,8 +2,10 @@ import sys
 import asyncio
 from aiohttp import web
 
+from utils import logging_view
 
-async def init(loop, address, port):
+
+async def init(loop: asyncio.BaseEventLoop, address: str, port: int) -> tuple:
     app = web.Application(loop=loop)
     app.router.add_route('GET', '/', home)
     handler = app.make_handler()
@@ -12,7 +14,7 @@ async def init(loop, address, port):
     return server.sockets[0].getsockname()
 
 
-def main(address='127.0.0.1', port='8888'):
+def main(address: str='127.0.0.1', port: str='8888'):
     port = int(port)
     loop = asyncio.get_event_loop()
     host = loop.run_until_complete(init(loop, address, port))
@@ -27,8 +29,8 @@ def main(address='127.0.0.1', port='8888'):
     loop.close()
 
 
-def home(request):
-    print('hello server!')
+@logging_view
+def home(request: web.Request) -> web.Response:
     return web.Response(text='Hello client!')
 
 
